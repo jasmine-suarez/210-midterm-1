@@ -1,3 +1,6 @@
+// COMSC-210 | Midterm 1 | Jasmine Suarez
+// IDE used: VS Code
+
 #include <iostream>
 using namespace std;
 
@@ -78,27 +81,29 @@ public:
         else
             head = temp->next;              // else if temp is head, move head to next node
 
-        if (temp->next)
-            temp->next->prev = temp->prev;
+        if (temp->next)                     // if temp isn't the last node
+            temp->next->prev = temp->prev;  // skip temp and go the previous node
         else
-            tail = temp->prev; 
+            tail = temp->prev;              // else if temp is tail, move tail to prev node
 
-        delete temp;
+        delete temp;                        // frees memory
     }
 
+    // function that deletes node at a specific position
     void delete_pos(int pos) {
-        if (!head) {
+        if (!head) {    // if list empty
             cout << "List is empty." << endl;
             return;
         }
     
-        if (pos == 1) {
+        if (pos == 1) {     // removes first node
             pop_front();
             return;
         }
     
-        Node* temp = head;
+        Node* temp = head;  // start from head
     
+        // for-loop moves until hits position
         for (int i = 1; i < pos; i++){
             if (!temp) {
                 cout << "Position doesn't exist." << endl;
@@ -107,11 +112,12 @@ public:
             else
                 temp = temp->next;
         }
-        if (!temp) {
+        if (!temp) {    // if position exceeds list length
             cout << "Position doesn't exist." << endl;
             return;
         }
     
+        // removes last node
         if (!temp->next) {
             pop_back();
             return;
@@ -123,14 +129,15 @@ public:
         delete temp;
     }
 
+    // function which add a value to end of list
     void push_back(int v) {
-        Node* newNode = new Node(v);
-        if (!tail)
-            head = tail = newNode;
+        Node* newNode = new Node(v);    // creates new node
+        if (!tail)                      // if list empty
+            head = tail = newNode;      // new node is equal to head and tail
         else {
-            tail->next = newNode;
-            newNode->prev = tail;
-            tail = newNode;
+            tail->next = newNode;       // current tail points to new node
+            newNode->prev = tail;       // new node points to 
+            tail = newNode;             // updates tail to new node
         }
     }
     
