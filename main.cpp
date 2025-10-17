@@ -2,6 +2,8 @@
 // IDE used: VS Code
 
 #include <iostream>
+#include <cstdlib> // srand(), rand()
+#include <ctime>   // time()
 using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
@@ -233,17 +235,30 @@ public:
             cout << "List is empty." << endl;
             return;
         }
-        cout << "Every other element: ";
         while (current) {
-            cout << current->data << " ";
+            cout << current->data << " "; // prints the value of the current node
+            if (current->next)  // if there is another node after current
+                current = current->next->next; // set current equal to the next, next node
+            else
+                return;     // returns if there isn't a next node
         }
+        cout << endl;
     }
 };
 
 int main() {
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
+    srand(time(0));
 
-    
+    DoublyLinkedList list;
+    int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS; // randomizes size of list
+
+    for (int i = 0; i < size; ++i) // adds random values into the list of randomized size
+        list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
+    cout << "List forward: ";
+    list.print();
+
+    cout << "List every other element: ";
+    list.every_other_element();
     
     return 0;
 }
