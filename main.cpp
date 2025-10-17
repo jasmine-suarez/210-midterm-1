@@ -136,22 +136,24 @@ public:
             head = tail = newNode;      // new node is equal to head and tail
         else {
             tail->next = newNode;       // current tail points to new node
-            newNode->prev = tail;       // new node points to 
+            newNode->prev = tail;       // new node points to old tail
             tail = newNode;             // updates tail to new node
         }
     }
     
+    // function which adds a value to front of list
     void push_front(int v) {
-        Node* newNode = new Node(v);
-        if (!head)
-            head = tail = newNode;
+        Node* newNode = new Node(v);    // creates new node
+        if (!head)                      // if list empty
+            head = tail = newNode;      // new node is equal to head and tail
         else {
-            newNode->next = head;
-            head->prev = newNode;
-            head = newNode;
+            newNode->next = head;       // new node points next to old head
+            head->prev = newNode;       // old head points previously to new node
+            head = newNode;             // updates head to new node
         }
     }
     
+    // removes first node of the list
     void pop_front() {
 
         if (!head) {
@@ -170,6 +172,7 @@ public:
         delete temp;
     }
 
+    // removes last node of the list
     void pop_back() {
         if (!tail) {
             cout << "List is empty." << endl;
@@ -186,6 +189,7 @@ public:
         delete temp;
     }
 
+    // destructor
     ~DoublyLinkedList() {
         while (head) {
             Node* temp = head;
@@ -193,6 +197,8 @@ public:
             delete temp;
         }
     }
+
+    // prints list from head to tail
     void print() {
         Node* current = head;
         if (!current) {
@@ -206,6 +212,7 @@ public:
         cout << endl;
     }
 
+    // prints list from tail to head
     void print_reverse() {
         Node* current = tail;
         if (!current) { 
@@ -218,11 +225,25 @@ public:
         }
         cout << endl;
     }
+
+    // prints every other element
+    void every_other_element() {
+        Node* current = head;       // start at head
+        if (!current) {             // returns if list is empty
+            cout << "List is empty." << endl;
+            return;
+        }
+        cout << "Every other element: ";
+        while (current) {
+            cout << current->data << " ";
+        }
+    }
 };
 
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
+    
     
     return 0;
 }
