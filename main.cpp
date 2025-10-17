@@ -3,12 +3,14 @@ using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
+// defines class DoublyLinkedList, represents a doubly-linked list
 class DoublyLinkedList {
 private:
+    // a struct named Node
     struct Node {
-        int data;
-        Node* prev;
-        Node* next;
+        int data;       // stores the value in the node
+        Node* prev;     // pointer to previous node in list
+        Node* next;     // pointer to next node in list
         Node(int val, Node* p = nullptr, Node* n = nullptr) {
             data = val; 
             prev = p;
@@ -16,12 +18,14 @@ private:
         }
     };
 
-    Node* head;
-    Node* tail;
+    Node* head;     // pointer to head (first) node in list
+    Node* tail;     // pointer to tail (last) node in list
 
 public:
+    // default constructor, which initializes head and tail to nullptr (empty)
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
+    // a function which inserts a new node with a value
     void insert_after(int value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
