@@ -25,29 +25,34 @@ public:
     // default constructor, which initializes head and tail to nullptr (empty)
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
-    // a function which inserts a new node with a value
+    // a function which inserts a new node with a value and after a certain position
     void insert_after(int value, int position) {
+        // checks to make sure position is valid
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
         }
 
+        // creates new node with given value
         Node* newNode = new Node(value);
-        if (!head) {
-            head = tail = newNode;
+        if (!head) {                    // this means if the list is empty
+            head = tail = newNode;      // the new node value is both head and tail
             return;
         }
 
+        // starts at the head (front)
         Node* temp = head;
-        for (int i = 0; i < position && temp; ++i)
-            temp = temp->next;
+        for (int i = 0; i < position && temp; ++i)  // for-loop goes through however
+            temp = temp->next;                      // many position steps forward
 
+        // if position out of bounds,
         if (!temp) {
             cout << "Position exceeds list size. Node not inserted.\n";
-            delete newNode;
+            delete newNode;     // deletes new node
             return;
         }
 
+        // link 
         newNode->next = temp->next;
         newNode->prev = temp;
         if (temp->next)
