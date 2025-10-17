@@ -52,30 +52,31 @@ public:
             return;
         }
 
-        // link 
-        newNode->next = temp->next;
-        newNode->prev = temp;
-        if (temp->next)
-            temp->next->prev = newNode;
-        else
-            tail = newNode;
-        temp->next = newNode;
+        // links the new node into list
+        newNode->next = temp->next;     // new node points forward to temps next node
+        newNode->prev = temp;           // new node points backwards to temp
+        if (temp->next)                 // if temp has a node after it,
+            temp->next->prev = newNode; // next node's previous pointer will now point to new node
+        else                            // if temp was the last node (tail),
+            tail = newNode;             // the tail is now the new node
+        temp->next = newNode;           // temps next points to new node
     }
 
+    // function which deletes a node, given a specific value
     void delete_val(int value) {
-        if (!head) return;
+        if (!head) return; // if the list is empty, return
 
-        Node* temp = head;
+        Node* temp = head; // temp is assigned to head, start at the head
         
-        while (temp && temp->data != value)
+        while (temp && temp->data != value) // traverses until value is found or end of list
             temp = temp->next;
 
-        if (!temp) return; 
+        if (!temp) return; // returns if value not found
 
-        if (temp->prev)
-            temp->prev->next = temp->next;
+        if (temp->prev)                     // if temp isn't the first node
+            temp->prev->next = temp->next;  // skip temp and go to next node
         else
-            head = temp->next; 
+            head = temp->next;              // else if temp is head, move head to next node
 
         if (temp->next)
             temp->next->prev = temp->prev;
