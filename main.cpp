@@ -125,9 +125,9 @@ public:
             return;
         }
     
-        Node* tempPrev = temp->prev;
-        tempPrev->next = temp->next;
-        temp->next->prev = tempPrev;
+        Node* tempPrev = temp->prev;    // stores pointer to previous node of the one we want to delete
+        tempPrev->next = temp->next;    // previous node next points to node after temp
+        temp->next->prev = tempPrev;    // node after temp points back to tempPrev
         delete temp;
     }
 
@@ -158,19 +158,19 @@ public:
     // removes first node of the list
     void pop_front() {
 
-        if (!head) {
+        if (!head) { // if the list is empty, return
             cout << "List is empty." << endl;
             return;
         }
 
-        Node * temp = head;
+        Node * temp = head; // pointer to head
 
-        if (head->next) {
-            head = head->next;
-            head->prev = nullptr;
+        if (head->next) {           // if there is a node after the head,
+            head = head->next;      // move head to the next node
+            head->prev = nullptr;   // sets new head's previous node to null
         }
         else
-            head = tail = nullptr;
+            head = tail = nullptr; // if there was only 1 node
         delete temp;
     }
 
