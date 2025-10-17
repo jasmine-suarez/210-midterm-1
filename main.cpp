@@ -171,20 +171,20 @@ public:
         }
         else
             head = tail = nullptr; // if there was only 1 node
-        delete temp;
+        delete temp;               // delete old head node
     }
 
     // removes last node of the list
     void pop_back() {
-        if (!tail) {
+        if (!tail) { // if the list is empty, return
             cout << "List is empty." << endl;
             return;
         }
-        Node * temp = tail;
+        Node * temp = tail; // pointer to tail
 
-        if (tail->prev) {
-            tail = tail->prev;
-            tail->next = nullptr;
+        if (tail->prev) {           // if more than one node,
+            tail = tail->prev;      // set node before tail as the new tail
+            tail->next = nullptr;   // set the original tail to null
         }
         else
             head = tail = nullptr;
